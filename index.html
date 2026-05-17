@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מדריך: איך להתחיל לעבוד עם AI בעסק בצורה מסודרת</title>
+  <style>
+    :root {
+      --page: #f3f0ea;
+      --paper: #fcfbf8;
+      --ink: #171717;
+      --muted: #5f5a53;
+      --line: #d9d1c7;
+      --line-strong: #b7ab9d;
+      --accent: #b14f2b;
+      --accent-soft: #f1e3da;
+      --max-width: 980px;
+      --radius: 22px;
+      --shadow: 0 10px 30px rgba(30, 24, 16, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: "Segoe UI", "Arial", sans-serif;
+      line-height: 1.8;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    code {
+      font-family: "Consolas", "Courier New", monospace;
+    }
+
+    .page {
+      width: min(calc(100% - 28px), var(--max-width));
+      margin: 20px auto 48px;
+    }
+
+    .sheet {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero {
+      position: relative;
+      padding: 42px 40px 34px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand-mark {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      width: 96px;
+      max-width: 18vw;
+      opacity: 0.92;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .kicker {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 6px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 700;
+      background: #fff;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.9fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 4.2vw, 4.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .subhead {
+      margin: 16px 0 0;
+      max-width: 30ch;
+      font-size: clamp(1.18rem, 1.8vw, 1.5rem);
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .source-line {
+      margin: 22px 0 0;
+      font-size: 1.06rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .lead {
+      margin: 28px 0 0;
+      max-width: 58ch;
+      font-size: 1.16rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 800;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      background: var(--ink);
+      color: #fff;
+      border: 1px solid var(--ink);
+    }
+
+    .button-secondary {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--line-strong);
+    }
+
+    .author-panel {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .portrait-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .portrait-card h2 {
+      margin: 12px 0 6px;
+      font-size: 1.18rem;
+      line-height: 1.3;
+    }
+
+    .portrait-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .portrait {
+      aspect-ratio: 4 / 5;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #f6f2eb;
+      overflow: hidden;
+    }
+
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .author-panel > p {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .author-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .author-tags span {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .content {
+      padding: 0 40px 40px;
+    }
+
+    .intro {
+      padding: 26px 0 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .intro p {
+      margin: 0;
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+
+    .intro .button {
+      margin-top: 18px;
+    }
+
+    .chapter {
+      padding: 34px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .chapter:last-of-type {
+      border-bottom: 0;
+    }
+
+    .chapter-label {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--accent);
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .chapter h3 {
+      margin: 0 0 16px;
+      font-size: clamp(1.7rem, 2.5vw, 2.25rem);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+
+    .chapter p {
+      margin: 0;
+      font-size: 1.12rem;
+    }
+
+    .compare {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .box {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .box h4 {
+      margin: 0 0 10px;
+      font-size: 1.22rem;
+    }
+
+    .box p {
+      margin: 0;
+      font-size: 1.04rem;
+      color: var(--muted);
+    }
+
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 22px;
+      align-items: center;
+    }
+
+    .flow-item {
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      font-size: 1.02rem;
+      font-weight: 700;
+    }
+
+    .flow-arrow {
+      color: var(--accent);
+      font-size: 1.28rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .step {
+      padding: 20px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .step strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .step p {
+      margin: 0;
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    .list {
+      margin-top: 18px;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .list li {
+      padding: 14px 16px;
+      border-right: 3px solid var(--accent);
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      font-size: 1.04rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .timeline {
+      margin-top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .timeline-item span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.96rem;
+      font-weight: 800;
+    }
+
+    .timeline-item p {
+      margin: 0;
+      font-size: 1.04rem;
+    }
+
+    .code-block {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #fff;
+      overflow-x: auto;
+      font-size: 0.98rem;
+      line-height: 1.85;
+      direction: rtl;
+      text-align: right;
+      white-space: pre-wrap;
+    }
+
+    .callout {
+      margin: 34px 0;
+      padding: 24px;
+      border-radius: 22px;
+      background: #fff;
+      border: 1px solid var(--line-strong);
+    }
+
+    .callout h3 {
+      margin: 0 0 10px;
+      font-size: 1.7rem;
+      line-height: 1.3;
+    }
+
+    .callout p {
+      margin: 0;
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+
+    .callout .button {
+      margin-top: 18px;
+    }
+
+    .summary {
+      padding: 34px 0 6px;
+    }
+
+    .summary h3 {
+      margin: 0 0 16px;
+      font-size: clamp(1.9rem, 2.8vw, 2.6rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .summary p {
+      margin: 0 0 14px;
+      font-size: 1.12rem;
+    }
+
+    .copyright {
+      margin-top: 30px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .compare,
+      .process,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .page {
+        width: min(calc(100% - 16px), var(--max-width));
+        margin: 8px auto 24px;
+      }
+
+      .hero,
+      .content {
+        padding-right: 20px;
+        padding-left: 20px;
+      }
+
+      .hero {
+        padding-top: 26px;
+        padding-bottom: 26px;
+      }
+
+      .brand-mark {
+        position: static;
+        width: 82px;
+        margin-bottom: 18px;
+      }
+
+      .sheet {
+        border-radius: 22px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .portrait-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 2.3rem;
+      }
+
+      .chapter p,
+      .summary p,
+      .lead,
+      .source-line {
+        font-size: 1.04rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="sheet">
+      <header class="hero">
+        <a class="brand-mark" href="#guide" aria-label="ScaleUp">
+          <img src="./לוגו.jpeg" alt="ScaleUp logo">
+        </a>
+        <div class="kicker">מדריך פרקטי למי שרוצה להכניס AI לעסק בצורה מסודרת, מדויקת ורווחית יותר</div>
+        <div class="hero-grid">
+          <div>
+            <h1>מדריך: איך להתחיל לעבוד עם AI בעסק בצורה מסודרת</h1>
+            <p class="subhead">לא מתחילים מכלי. מתחילים מהבעיה העסקית, מהמיפוי הנכון, ומה-Use Case הראשון שיכול באמת לייצר ערך.</p>
+            <p class="source-line">
+              מאת מאי רייזמן ומרסלה רייזמן, ScaleUp. מדריך מבוסס על הוובינר הראשון של הקהילה שלנו, שבו 30 בעלי עסקים ואנשי מקצוע הקדישו 45 דקות מערב חמישי כדי להבין איך עובדים עם AI נכון.
+            </p>
+            <p class="lead">
+              אם פספסתם את הוובינר, זה בדיוק הסיכום הפרקטי שלו: איך ממפים את העסק, איך מזהים איפה AI באמת יכול לעזור, ואיך בוחרים תהליך אחד ברור להתחלה בלי להתפזר ובלי לרדוף אחרי הייפ.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0ppggGsyTUlEsBGauiMAHEbJ03BSY3Aseb-9B-J_g85v7uUPdTpGXkxPMwEuAtPF0JqB00ywre" target="_blank" rel="noreferrer">לקביעת שיחת היכרות בחינם</a>
+              <a class="button button-secondary" href="#guide">לקריאת המדריך</a>
+            </div>
+          </div>
+
+          <aside class="author-panel">
+            <div class="portrait-grid">
+              <div class="portrait-card">
+                <div class="portrait">
+                  <img src="./אני.jpeg" alt="מאי רייזמן">
+                </div>
+                <h2>מאי רייזמן</h2>
+                <p>יועץ ומטמיע AI בסקיילאפ, עם חיבור בין אסטרטגיה, תהליכים וביצוע.</p>
+              </div>
+              <div class="portrait-card">
+                <div class="portrait">
+                  <img src="./אמא.png" alt="מרסלה רייזמן">
+                </div>
+                <h2>מרסלה רייזמן</h2>
+                <p>מנכ"לית סקיילאפ, מביאה את הזווית הניהולית והעסקית לשטח.</p>
+              </div>
+            </div>
+            <p>
+              יחד אנחנו מלווים עסקים וארגונים בהטמעת AI מתוך חשיבה עסקית, לא מתוך טרנדים. המטרה שלנו היא לעזור לכם לחבר בין צורך אמיתי, תהליך נכון וכלים שעובדים בפועל.
+            </p>
+            <div class="author-tags">
+              <span>ScaleUp</span>
+              <span>AI לעסקים</span>
+              <span>Business Mapping</span>
+            </div>
+          </aside>
+        </div>
+      </header>
+
+      <div class="content" id="guide">
+        <section class="intro">
+          <p>
+            הנקודה המרכזית שעלתה כבר בדקות הראשונות של הוובינר הייתה פשוטה: רוב העסקים לא צריכים להתחיל מהשאלה "איזה כלי AI כדאי לי להשתמש בו?", אלא מהשאלה "איפה בכלל AI יכול לייצר לי ערך בעסק?".
+          </p>
+          <p style="margin-top:16px;">
+            ברגע שמתחילים מהשאלה הנכונה, גם ההטמעה נהיית הרבה יותר מסודרת. במקום לרוץ אחרי פיצ'רים, ממפים את העסק, מבינים איפה יש עומס, חזרתיות או חוסר אחידות, ורק אז בוחרים נקודת התחלה.
+          </p>
+          <p style="margin-top:16px;">
+            זה בדיוק מה שהמדריך הזה בא לעשות: לקחת את הרעיונות מהוובינר ולהפוך אותם למסלול עבודה ברור שאפשר ליישם כבר מחר בבוקר.
+          </p>
+          <a class="button button-secondary" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0ppggGsyTUlEsBGauiMAHEbJ03BSY3Aseb-9B-J_g85v7uUPdTpGXkxPMwEuAtPF0JqB00ywre" target="_blank" rel="noreferrer">רוצה לבנות תהליך כזה אצלך בעסק?</a>
+        </section>
+
+        <section class="chapter">
+          <span class="chapter-label">פתיחה</span>
+          <h3>AI הוא לא המטרה. הוא אמצעי לפתור בעיה עסקית.</h3>
+          <p>
+            אחת הטעויות הנפוצות ביותר היא להתחיל להשתמש ב-AI בלי לעצור לשאול מה בדיוק רוצים לשפר. אפשר לכתוב איתו, לחפש איתו, לתרגם איתו ואפילו להכין מצגות איתו, אבל בלי מטרה עסקית ברורה זה כמעט תמיד נשאר ברמת "נחמד", ולא באמת יוצר שינוי.
+          </p>
+          <ul class="list">
+            <li>לא שואלים קודם "איזה כלי בא לי לנסות?" אלא "איזו בעיה עסקית אני רוצה לפתור?".</li>
+            <li>לא מטמיעים AI כי זה טרנדי, אלא כי רוצים להגיע לתוצאה מדידה יותר טובה.</li>
+            <li>לפני כל כלי או אוטומציה, צריך להבין איפה העסק נמצא היום ולאן רוצים להגיע.</li>
+          </ul>
+        </section>
+
+        <section class="chapter">
+          <span class="chapter-label">שלב 1</span>
+          <h3>מחלקים את העסק לאזורים מרכזיים</h3>
+          <p>
+            השלב הראשון במיפוי הוא להסתכל על העסק מלמעלה ולחלק אותו לאזורים ברורים. ברוב העסקים אלה יהיו שיווק, מכירות, שירות, תפעול, ניהול ידע, כספים, משאבי אנוש ולעיתים גם אזור טכנולוגי או מקצועי ייחודי.
+          </p>
+          <div class="grid-3">
+            <div class="box">
+              <h4>חזית העסק</h4>
+              <p>שיווק, מכירות, שירות לקוחות וכל מה שנוגע לקשר עם לקוחות קיימים ופוטנציאליים.</p>
+            </div>
+            <div class="box">
+              <h4>תפעול פנימי</h4>
+              <p>ביצוע, פרויקטים, בק אופיס, משימות חוזרות, ניהול משימות ותיאום בין אנשים.</p>
+            </div>
+            <div class="box">
+              <h4>ניהול וצמיחה</h4>
+              <p>ידע, כספים, בקרה, דוחות, קבלת החלטות, גיוס והכשרת עובדים.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="chapter">
+          <span class="chapter-label">שלב 2</span>
+          <h3>בתוך כל אזור מפרקים את התהליך הקיים</h3>
+          <p>
+            עכשיו לא שואלים עדיין מה AI יעשה. קודם מבינים מה קורה היום: מי עושה את התהליך, כמה זמן הוא לוקח, איפה הוא תקוע, איפה יש חזרתיות, ואיפה כל אחד בארגון עושה אותו קצת אחרת.
+          </p>
+          <div class="flow" aria-label="תהליך מיפוי עסקי">
+            <div class="flow-item">מה קורה היום</div>
+            <div class="flow-arrow">←</div>
+            <div class="flow-item">מי עושה את זה</div>
+            <div class="flow-arrow">←</div>
+            <div class="flow-item">כמה זמן זה לוקח</div>
+            <div class="flow-arrow">←</div>
+            <div class="flow-item">איפה יש עומס וחזרתיות</div>
+          </div>
+          <div class="compare">
+            <div class="box">
+              <h4>מה מחפשים</h4>
+              <p>זמני טיפול ארוכים, כפילויות, עבודה ידנית, מידע שמפוזר בין אנשים והחלטות לא אחידות.</p>
+            </div>
+            <div class="box">
+              <h4>למה זה חשוב</h4>
+              <p>אם התהליך עצמו מבולגן, גם AI רק יאיץ את הבלגן. הסדר צריך להתחיל מהבנה עסקית.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="chapter">
+          <span class="chapter-label">שלב 3</span>
+          <h3>מזהים Use Cases אפשריים ל-AI</h3>
+          <p>
+            רק אחרי שהמיפוי ברור מתחילים לשאול איפה AI יכול לעזור. בדרך כלל אלה יהיו מקומות שבהם יש שאלות שחוזרות על עצמן, תוכן שצריך לייצר, מידע שצריך לנתח, או תהליך שאפשר לקצר בלי לפגוע באיכות.
+          </p>
+          <div class="process">
+            <div class="step">
+              <strong>זיהוי חזרתיות</strong>
+              <p>אימיילים דומים, שאלות מכירה שחוזרות, כתיבה שחוזרת על עצמה, סיכומי פגישות או הפקת מסמכים.</p>
+            </div>
+            <div class="step">
+              <strong>זיהוי עומס</strong>
+              <p>צווארי בקבוק, משימות ש"תלויות רק באדם אחד", ניתוחים שלוקחים יותר מדי זמן או עבודה ידנית מיותרת.</p>
+            </div>
+          </div>
+          <ul class="list">
+            <li>בתוך מכירות: בניית הצעות מחיר, מענה ללידים, סיכום שיחות והכנת פולו-אפ.</li>
+            <li>בתוך שיווק: רעיונות לתוכן, התאמת מסרים, ניתוח קהלים ובניית טיוטות.</li>
+            <li>בתוך תפעול: תיעוד תהליכים, ארגון ידע, מעקב משימות והאצת בק אופיס.</li>
+          </ul>
+        </section>
+
+        <section class="callout">
+          <h3>לא מנסים "להכניס AI לעסק". בוחרים Use Case אחד ברור ומתחילים ממנו.</h3>
+          <p>
+            זה אחד העקרונות הכי חשובים. לא מטמיעים בבת אחת בכל המחלקות, אלא בוחרים תהליך אחד שאפשר למדוד, לבדוק ולשפר. אם זה עובד, ממשיכים הלאה. אם לא, לומדים למה ועוצרים בזמן.
+          </p>
+          <a class="button button-primary" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0ppggGsyTUlEsBGauiMAHEbJ03BSY3Aseb-9B-J_g85v7uUPdTpGXkxPMwEuAtPF0JqB00ywre" target="_blank" rel="noreferrer">לקביעת שיחת היכרות בחינם</a>
+        </section>
+
+        <section class="chapter">
+          <span class="chapter-label">Use Case</span>
+          <h3>למה בחרנו בוובינר דווקא את תחום הצעות המחיר?</h3>
+          <p>
+            הצעת מחיר נראית לפעמים כמו מסמך שגרתי, אבל בפועל היא נוגעת בלב העסק: זמן, עלויות, רווחיות, סיכונים, ציפיות ומבנה התשלום. לכן זה Use Case מעולה להתחלה, כי הוא גם רלוונטי כמעט לכל עסק וגם חושף מהר מאוד האם החשיבה העסקית שלנו באמת מסודרת.
+          </p>
+          <div class="compare">
+            <div class="box">
+              <h4>הבעיה הנפוצה</h4>
+              <p>כל אחד מתמחר קצת אחרת, מעריך שעות אחרת, ושוכח לקחת בחשבון עלויות, סיכונים או עומס קיים.</p>
+            </div>
+            <div class="box">
+              <h4>המטרה</h4>
+              <p>לייצר תהליך אחיד שמוביל להצעות מחיר עקביות, נכונות יותר עסקית וברורות יותר גם מול הלקוח.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="chapter">
+          <span class="chapter-label">שלב 4</span>
+          <h3>כשעובדים עם AI, חייבים לתת קונטקסט אמיתי</h3>
+          <p>
+            מודל שפה יכול לעזור מאוד, אבל רק אם הוא מקבל מספיק מידע. בלי קונטקסט הוא ישלים פערים בעצמו, וזה בדיוק המקום שבו נוצרות טעויות עסקיות. לכן לא "זורקים" לו בקשה כללית, אלא מלמדים אותו להבין את המציאות של העסק.
+          </p>
+          <div class="code-block" dir="rtl" style="text-align:right;"><code>הקונטקסט שכדאי לתת ל-AI כולל למשל:
+- מי הלקוח ומה תחום הפעילות שלו
+- מה מטרת הפרויקט ומה הבעיה שהוא רוצה לפתור
+- מה התוצר שהלקוח מצפה לקבל
+- האם זו עבודה חד פעמית או מתמשכת
+- מי מקבל החלטות מצד הלקוח
+- אילו עלויות חיצוניות, תלויות, דדליין ושפת הצעה קיימים</code></div>
+        </section>
+
+        <section class="chapter">
+          <span class="chapter-label">שלב 5</span>
+          <h3>שלושת הצירים לעבודה טובה עם AI על הצעת מחיר</h3>
+          <p>
+            בוובינר חילקנו את העבודה עם AI לשלושה צירים פשוטים: עובדות, התייעצויות ותוצאה. ההפרדה הזאת עושה סדר ומקטינה מאוד סיכון לטעויות.
+          </p>
+          <div class="grid-3">
+            <div class="box">
+              <h4>עובדות</h4>
+              <p>מה בטוח נכון: לקוח, תקציב, מע"מ, תעריף שעה, לוחות זמנים, עלויות והיקף.</p>
+            </div>
+            <div class="box">
+              <h4>התייעצויות</h4>
+              <p>מה פתוח לשיקול דעת: מורכבות, סיכונים, עיכובים אפשריים, מספר פגישות ועומס נוכחי.</p>
+            </div>
+            <div class="box">
+              <h4>תוצאה</h4>
+              <p>סך שעות, מחיר מומלץ, רווחיות צפויה, מבנה תשלום ופידבק על חוסרים במידע.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="chapter">
+          <span class="chapter-label">פיילוט</span>
+          <h3>איך בודקים אם זה באמת עובד?</h3>
+          <p>
+            אחרי שבחרתם Use Case אחד, הפעילו אותו כפיילוט. אל תשפטו לפי ההתלהבות מהכלי, אלא לפי התוצאה העסקית בפועל: האם חסכתם זמן, האם קיבלתם יותר אחידות, האם החלטות היו טובות יותר, והאם הרווחיות השתפרה.
+          </p>
+          <div class="timeline">
+            <div class="timeline-item">
+              <span>1</span>
+              <p>בוחרים תהליך אחד בלבד להתחלה.</p>
+            </div>
+            <div class="timeline-item">
+              <span>2</span>
+              <p>מגדירים מה נחשב הצלחה: זמן, איכות, אחידות, רווחיות או קיצור תהליך.</p>
+            </div>
+            <div class="timeline-item">
+              <span>3</span>
+              <p>מריצים פיילוט קטן ומודדים תוצאה אמיתית.</p>
+            </div>
+            <div class="timeline-item">
+              <span>4</span>
+              <p>עבד? ממשיכים ל-Use Case הבא. לא עבד? עוצרים להבין אם הבעיה, הכלי או התהליך הוגדרו לא נכון.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="chapter">
+          <span class="chapter-label">חשוב לזכור</span>
+          <h3>AI הוא לא קסם, אבל כשהוא יושב על תהליך נכון הערך שלו אמיתי</h3>
+          <p>
+            AI לא מחליף חשיבה עסקית, לא מתקן תהליך שבור מעצמו ולא פותר בעיה שלא הוגדרה. מצד שני, כשמשתמשים בו נכון הוא יכול לעזור לקבל החלטות טובות יותר, לצמצם עבודה רפטטיבית, לייצר עקביות, לשפר ניהול ידע ולפנות יותר זמן לצמיחה.
+          </p>
+          <ul class="list">
+            <li>הוא עוזר להאיץ ביצוע, אבל רק אחרי שהגדרתם את היעד והלוגיקה העסקית.</li>
+            <li>הוא יכול לשפר רווחיות כבר בטווח קצר כשעובדים על Use Case נכון.</li>
+            <li>הערך הגדול ביותר מגיע משילוב בין הבנה עסקית, תהליך מסודר וכלי מתאים.</li>
+          </ul>
+        </section>
+
+        <section class="summary">
+          <h3>הדרך הנכונה להתחיל עם AI בעסק היא לא מהכלי, אלא מהמיפוי.</h3>
+          <p>
+            מחלקים את העסק לאזורים, מפרקים את התהליכים, מזהים Use Cases אפשריים, בוחרים אחד להתחלה ורק אז בודקים איך AI יכול לשרת אותו. זאת גישה פשוטה, אבל היא זאת שמייצרת תוצאות יציבות ולא רק התלהבות רגעית.
+          </p>
+          <p>
+            אם פספסתם את הוובינר, זה המדריך שנועד לתת לכם את הערך הפרקטי ממנו. ואם אתם רוצים לקחת את זה צעד קדימה ולבנות מיפוי מסודר גם אצלכם, אפשר להמשיך משם לשיחה.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0ppggGsyTUlEsBGauiMAHEbJ03BSY3Aseb-9B-J_g85v7uUPdTpGXkxPMwEuAtPF0JqB00ywre" target="_blank" rel="noreferrer">לקביעת שיחת היכרות בחינם</a>
+            <a class="button button-secondary" href="#guide">לחזרה לתחילת המדריך</a>
+          </div>
+          <div class="copyright">
+            ScaleUp Business Consulting · מדריך בעברית לעבודה חכמה יותר עם AI בעסקים
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
